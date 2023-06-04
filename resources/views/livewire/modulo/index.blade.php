@@ -38,26 +38,14 @@
                                     <td>{{ $modulo->nombre }}</td>
                                     <td>{{ $modulo->modelo }}</td>
                                     <td class="text-right">
-                                        <div class="dropdown">
-                                            <a href="#" class="dropdown-ellipses dropdown-toggle" role="button"
-                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                <i class="fe fe-more-vertical"></i>
-                                            </a>
-                                            <div class="dropdown-menu dropdown-menu-right">
-
-                                                <a href="{{ route('modulos.editar', $modulo->id) }}"
-                                                    class="dropdown-item">
-                                                    <i class="fe fe-edit-3"></i> Editar
-                                                </a>
-
-                                                <div class="dropdown-divider"></div>
-                                                
-                                                <button wire:click="confirmDelete('{{ base64_encode($modulo->id) }}')"
-                                                    class="dropdown-item">
-                                                    <i class="fe fe-trash"></i> Eliminar
-                                                </button>
-                                            </div>
-                                        </div>
+                                        <a href="{{ route('modulos.editar', $modulo->id) }}"
+                                            class="mr-2">
+                                            <i class="fe fe-edit-3"></i>
+                                        </a>
+                                        <a wire:click="confirmDelete('{{ base64_encode($modulo->id) }}')"
+                                            class="mr-2" style="cursor:pointer">
+                                            <i class="fe fe-trash"></i>
+                                        </a>
                                     </td>
                                 </tr>
                             @endforeach

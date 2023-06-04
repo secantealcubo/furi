@@ -8,47 +8,45 @@ use Livewire\WithPagination;
 
 class Index extends Component
 {
-  use WithPagination;
+    use WithPagination;
 
-  // pagination config
-  public $resultsPerPage = 10;
-  protected $paginationTheme = 'bootstrap';
+    // Pagination config
+    public $resultsPerPage = 10;
+    protected $paginationTheme = 'bootstrap';
 
-  // event listener
-  protected $listeners = ['deleteConfirmed' => 'deleteUser'];
-  
-  public $userId;
-  public $search = '';
+    // Event listener
+    protected $listeners = [
+        'deleteConfirmed' => 'deleteUser'
+    ];
 
-  public function updatingResultsPerPage()
-  {
-    $this->resetPage();
-  }
-  
-  public function render()
-  {
+    public $userId;
+    public $search = '';
 
-      $usuarios = User::where('name','LIKE', "%{$this->search}%")->orWhere('email','LIKE', "%{$this->search}%")->paginate($this->resultsPerPage);
-      
+    public function updatingResultsPerPage()
+    {
+        $this->resetPage();
+    }
 
-    return view('livewire.usuario.index', [
-      'usuarios' => $usuarios,
-    ])->layout('layouts.master');
-  }
+    public function render()
+    {
+        $usuarios = User::where('name', 'LIKE', "%{$this->search}%")
+            ->orWhere('email', 'LIKE', "%{$this->search}%")
+            ->paginate($this->resultsPerPage);
 
-  public function confirmDelete($encodedID)
-  {
-    $this->emit('confirmDelete');
-    $this->userId = base64_decode($encodedID);
-  }
+        return view('livewire.usuario.index', compact('usuarios'))
+            ->layout('layouts.master');
+    }
 
-  public function deleteUser()
-  {
-    $user = User::find($this->userId);
-    $user->delete();
-    $this->emit('toast', ['success','Usuario eliminado correctamente']);
-    $this->resetPage();
+    public function confirmDelete($encodedID)
+    {
+        $this->emit('confirmDelete');
+        $this->userId = base64_decode($encodedID);
+    }
 
-  }
-
+    public function deleteUser()
+    {
+        User::findOrFail($this->userId)->delete();
+        $this->emit('toast', ['success', 'Usuario eliminado correctamente']);
+        $this->resetPage();
+    }
 }

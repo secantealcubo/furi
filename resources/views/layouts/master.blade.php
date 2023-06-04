@@ -68,18 +68,18 @@
                      </a>
                   </li>
                   @endif
-                  <!-- 
+                  
                   <li class="nav-item">
                      <a a href="{{ route('modulos.index') }}" class="nav-link {{ (request()->routeIs('modulos.index')) ? 'active' : '' }}">
-                        Módulo
+                        <i class="fe fe-book"></i> Módulo
                      </a>
                   </li>
                   <li class="nav-item">
                      <a href="{{ route('permisos.index') }}" class="nav-link {{ (request()->routeIs('permisos.nuevo')) ? 'active' : '' }}">
-                        Permisos
+                        <i class="fe fe-book"></i> Permisos
                      </a>
                   </li>
-                  -->
+                  
                </ul>
                <!-- Divider -->
                <hr class="navbar-divider my-3">

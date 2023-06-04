@@ -118,27 +118,24 @@ class Form extends Component
 
   public function handlePermission($permission)
   {
-    if(in_array($permission, $this->permissions))
-    {
       $index = array_search($permission, $this->permissions);
-      array_splice($this->permissions, $index, 1);
-    }else{
-      array_push($this->permissions, $permission);
-    }
+  
+      if ($index !== false) {
+          unset($this->permissions[$index]);
+      } else {
+          $this->permissions[] = $permission;
+      }
   }
-
+  
   public function getModulesRole()
   {
-
-    foreach (\Auth::user()->getPermissionsViaRoles() as $key => $value) {
-      $modulo_permiso=ModuloPermiso::where('permiso_id',$value->id)->first();
-      if($modulo_permiso)
-      {
-        $modulo[]=$modulo_permiso->modulo_id;
-      }
-    }
-    $modulo_bd=Modulo::whereIn('id',$modulo)->with('permisos')->get();
-    return $modulo_bd;
+      $permissionIds = \Auth::user()->getPermissionsViaRoles()->pluck('id')->toArray();
+  
+      $moduloIds = ModuloPermiso::whereIn('permiso_id', $permissionIds)->pluck('modulo_id')->toArray();
+  
+      $modulo_bd = Modulo::whereIn('id', $moduloIds)->with('permisos')->get();
+  
+      return $modulo_bd;
   }
-
+  
 }

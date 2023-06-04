@@ -118,22 +118,11 @@
                                     <td>{{ $relation->permiso->id }}</td>
                                     <td>{{ $relation->permiso->name }}</td>
                                     <td>{{ $relation->modulo->nombre }}</td>
-                                    <td class="text-right">
-                                        <div class="dropdown">
-                                            <a href="#" class="dropdown-ellipses dropdown-toggle" role="button"
-                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                <i class="fe fe-more-vertical"></i>
-                                            </a>
-                                            <div class="dropdown-menu dropdown-menu-right">
-
-                                                <div class="dropdown-divider"></div>
-                                                
-                                                <button wire:click="confirmDelete('{{ base64_encode($relation->id) }}')"
-                                                    class="dropdown-item">
-                                                    <i class="fe fe-trash"></i> Eliminar
-                                                </button>
-                                            </div>
-                                        </div>
+                                    <td class="text-right">                                               
+                                        <button wire:click="confirmDelete('{{ base64_encode($relation->id) }}')"
+                                            class="dropdown-item">
+                                            <i class="fe fe-trash"></i>
+                                        </button>
                                     </td>
                                 </tr>
                             @endforeach
