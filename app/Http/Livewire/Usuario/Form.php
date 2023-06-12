@@ -90,8 +90,11 @@ class Form extends Component
     
             $this->user->email = $this->email;
         }
-    
-        $this->user->roles()->sync([$this->rolUsuario]);
+        if($this->user->getRoleNames()->first())
+        {
+            $this->user->removeRole($this->user->getRoleNames()->first());
+        }
+        $this->user->assignRole($this->rolUsuario);
     
         if (!empty($this->password)) {
             if ($this->password != $this->password_confirmation) {
