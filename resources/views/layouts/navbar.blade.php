@@ -43,7 +43,7 @@
                 </a>
              </li>
              @endif
-             
+            {{-- 
              <li class="nav-item">
                 <a a href="{{ route('modulos.index') }}" class="nav-link {{ (request()->routeIs('modulos.index')) ? 'active' : '' }}">
                    <i class="fe fe-book"></i> Módulo
@@ -54,7 +54,7 @@
                    <i class="fe fe-book"></i> Permisos
                 </a>
              </li>
-             
+            --}}
           </ul>
           <!-- Divider -->
           <hr class="navbar-divider my-3">
